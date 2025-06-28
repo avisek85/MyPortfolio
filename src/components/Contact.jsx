@@ -76,27 +76,67 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setIsSubmitting(true);
+
+  //   const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  //   const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+  //   const userID = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+  //   const templateParams = {
+  //     from_name: formData.name,
+  //     from_email: formData.email,
+  //     message: formData.message,
+  //   };
+
+  //   try {
+  //     await emailjs.send(serviceID, templateID, templateParams, userID);
+  //     toast({
+  //       title: "Message Sent!",
+  //       description: "Thank you for your message. I'll get back to you soon!",
+  //     });
+  //     setFormData({ name: "", email: "", message: "" });
+  //   } catch (err) {
+  //     toastError({
+  //       title: "Failed to Send",
+  //       description:
+  //         "There was an error sending your message. Try again later.",
+  //     });
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const userID = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-    const templateParams = {
-      from_name: formData.name,
-      from_email: formData.email,
-      message: formData.message,
-    };
+    const formEndpoint = "https://formspree.io/f/mdkzywya"; // Replace with your actual Formspree endpoint
 
     try {
-      await emailjs.send(serviceID, templateID, templateParams, userID);
-      toast({
-        title: "Message Sent!",
-        description: "Thank you for your message. I'll get back to you soon!",
+      const response = await fetch(formEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
       });
-      setFormData({ name: "", email: "", message: "" });
+
+      if (response.ok) {
+        toast({
+          title: "Message Sent!",
+          description: "Thank you for your message. I'll get back to you soon!",
+        });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        throw new Error("Failed to send message");
+      }
     } catch (err) {
       toastError({
         title: "Failed to Send",
@@ -107,7 +147,7 @@ export default function Contact() {
       setIsSubmitting(false);
     }
   };
-
+  
   return (
     <section
       id="contact"
