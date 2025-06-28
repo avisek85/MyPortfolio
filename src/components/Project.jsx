@@ -18,7 +18,7 @@ const projects = [
       "A full-stack voice cloning application using FastAPI, React, and Coqui/Vakyansh TTS. Allows users to upload voice samples and generate speech using personalized AI voices.",
     image: "/VocalAI.png?height=300&width=500", // Replace with actual image path if hosted
     tech: ["React", "FastAPI", "Python", "Coqui TTS", "Vakyansh", "SQLite"],
-    category: "AI/ML",
+    category: "AI",
     features: [
       "Upload voice sample & assign name",
       "Generate speech using Coqui or Vakyansh models",
@@ -100,7 +100,7 @@ const projects = [
   },
 ];
 
-const categories = ["All", "MERN", "Automation"];
+const categories = ["All", "MERN", "Automation","AI"];
 
 export default function Projects() {
   const [selectedCategory, setSelectedCategory] = useState("All");
