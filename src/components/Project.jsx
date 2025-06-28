@@ -12,6 +12,24 @@ import { Button } from "./ui/Button";
 
 const projects = [
   {
+    id: 0,
+    title: "VocalAI: Voice Cloning Web App",
+    description:
+      "A full-stack voice cloning application using FastAPI, React, and Coqui/Vakyansh TTS. Allows users to upload voice samples and generate speech using personalized AI voices.",
+    image: "/VocalAI.png?height=300&width=500", // Replace with actual image path if hosted
+    tech: ["React", "FastAPI", "Python", "Coqui TTS", "Vakyansh", "SQLite"],
+    category: "AI/ML",
+    features: [
+      "Upload voice sample & assign name",
+      "Generate speech using Coqui or Vakyansh models",
+      "Real-time audio preview and download",
+      "Voice storage and model switching support",
+      "Spinner-based loading UX for long tasks",
+    ],
+    liveDemo: "https://github.com/avisek85/VocalAi1", // or hosted URL
+    github: "https://github.com/avisek85/VocalAi1",
+  },
+  {
     id: 1,
     title: "PC Activity Tracker",
     description:
