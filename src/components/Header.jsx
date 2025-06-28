@@ -28,23 +28,29 @@ export default function Header() {
 
   const scrollToSection = (href) => {
     const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (el) {
+      setTimeout(() => {
+        el.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
+    
     setIsOpen(false);
   };
 
   if (!mounted) return null;
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed inset-x-0 top-0 z-50 w-full overflow-x-hidden transition-all duration-300 ${
-        scrolled
-          ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg"
-          : "bg-transparent"
-      }`}
-    >
-      <nav className="container mx-auto px-4 py-4 overflow-x-hidden">
+   <motion.header
+  initial={{ y: -100 }}
+  animate={{ y: 0 }}
+  className={`fixed top-0 left-0 right-0 z-50 overflow-x-hidden transition-all duration-300 ${
+    scrolled
+      ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg"
+      : "bg-transparent"
+  }`}
+>
+  <nav className="container mx-auto px-4 py-4 overflow-x-hidden">
+
         <div className="flex items-center justify-between">
           {/* Logo */}
           <motion.div
@@ -83,14 +89,14 @@ export default function Header() {
 
           {/* Mobile Navigation */}
           <div className="md:hidden flex items-center space-x-4">
-            <button variant="ghost" size="icon" onClick={toggleTheme}>
+            <Button variant="ghost" size="icon" onClick={toggleTheme}>
               {theme === "dark" ? (
                 <Sun className="h-5 w-5" />
               ) : (
                 <Moon className="h-5 w-5" />
               )}
-            </button>
-            <button
+            </Button>
+            <Button
               variant="ghost"
               size="icon"
               onClick={() => setIsOpen(!isOpen)}
@@ -100,7 +106,7 @@ export default function Header() {
               ) : (
                 <Menu className="h-6 w-6" />
               )}
-            </button>
+            </Button>
           </div>
         </div>
 
