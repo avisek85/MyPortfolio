@@ -83,13 +83,18 @@ const Education = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 viewport={{ once: true }}
-                className={`relative flex items-center mb-12 ${
-                  index % 2 === 0 ? "flex-row" : "flex-row-reverse"
-                }`}
+                className={`relative flex items-center mb-12 
+                  flex-col sm:flex-row 
+                  ${index % 2 === 0 ? "sm:flex-row" : "sm:flex-row-reverse"}
+                `}
               >
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-blue-600 rounded-full border-4 border-white dark:border-gray-800 z-10"></div>
+                <div className="absolute left-1/2 top-4 sm:top-auto transform -translate-x-1/2 w-4 h-4 bg-blue-600 rounded-full border-4 border-white dark:border-gray-800 z-10"></div>
 
-                <div className={`w-5/12 ${index % 2 === 0 ? "pr-8" : "pl-8"}`}>
+                <div
+                  className={`w-full sm:w-5/12 ${
+                    index % 2 === 0 ? "sm:pr-8" : "sm:pl-8"
+                  }`}
+                >
                   <Card className="hover:shadow-lg transition-shadow duration-300">
                     <CardContent className="p-6">
                       <div className="flex items-start space-x-4">
@@ -130,7 +135,7 @@ const Education = () => {
           <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-8 text-center">
             Professional Certifications
           </h3>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {certifications.map((cert, index) => (
               <motion.div
                 key={index}
@@ -168,5 +173,6 @@ const Education = () => {
     </section>
   );
 };
+
 
 export default Education;

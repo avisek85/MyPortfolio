@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "emailjs-com";
@@ -81,10 +80,9 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // EmailJS config
-    const serviceID = "service_8hvbpzi"; ;
-    const templateID = "template_szzl3xf";
-    const userID = "UerBETb1qP0U5q5e9";
+    const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const userID = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
     const templateParams = {
       from_name: formData.name,
@@ -111,8 +109,11 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-800">
-      <div className="container mx-auto px-4">
+    <section
+      id="contact"
+      className="py-16 sm:py-20 bg-gray-50 dark:bg-gray-800"
+    >
+      <div className="container mx-auto px-4 max-w-screen-xl">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -120,15 +121,15 @@ export default function Contact() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4">
             Get In Touch
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             Let's discuss your next project or just say hello!
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -136,7 +137,7 @@ export default function Contact() {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <Card>
+            <Card className="w-full">
               <CardHeader>
                 <CardTitle className="text-2xl text-gray-800 dark:text-white">
                   Contact Information
@@ -152,16 +153,16 @@ export default function Contact() {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     viewport={{ once: true }}
                     whileHover={{ scale: 1.02 }}
-                    className="flex items-center space-x-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    className="flex flex-wrap sm:flex-nowrap items-center space-x-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                   >
                     <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-lg">
                       <info.icon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
                     </div>
-                    <div>
+                    <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-gray-800 dark:text-white">
                         {info.title}
                       </h3>
-                      <p className="text-gray-600 dark:text-gray-400">
+                      <p className="text-gray-600 dark:text-gray-400 break-words">
                         {info.value}
                       </p>
                     </div>
@@ -170,14 +171,14 @@ export default function Contact() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="w-full">
               <CardHeader>
                 <CardTitle className="text-xl text-gray-800 dark:text-white">
                   Connect With Me
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex space-x-4">
+                <div className="flex flex-wrap gap-4 justify-start sm:justify-center">
                   {socialLinks.map((social, index) => (
                     <motion.a
                       key={index}
@@ -205,7 +206,7 @@ export default function Contact() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <Card>
+            <Card className="w-full">
               <CardHeader>
                 <CardTitle className="text-2xl text-gray-800 dark:text-white">
                   Send Me a Message
@@ -260,7 +261,7 @@ export default function Contact() {
                       />
                     ) : (
                       <Send className="mr-2 h-5 w-5" />
-                    )}{" "}
+                    )}
                     {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
                 </form>

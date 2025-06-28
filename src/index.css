@@ -3,3 +3,8 @@
 
 /* Tells Tailwind to look for .dark class on html or its children */
 @custom-variant dark (&:where(.dark, .dark *));
+
+html,
+body {
+    overflow-x: hidden;
+}
